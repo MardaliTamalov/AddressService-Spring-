@@ -17,10 +17,10 @@ public class Apartment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private int id;
 
     @Column(name = "area")
-    private Integer area;
+    private float area;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "house_id", referencedColumnName = "id")

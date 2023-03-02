@@ -1,4 +1,4 @@
 package com.example.addressservice.dto;
 
-public record CityStreetHouseDto(String city, String street, Integer house) {
+public record CityStreetHouseDto(String city, String street, String house) {
 }

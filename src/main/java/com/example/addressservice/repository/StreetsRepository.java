@@ -11,10 +11,10 @@ public interface StreetsRepository extends JpaRepository<Street, Integer> {
 
     @Query(value = """
             select new com.example.addressservice.dto.StreetsHousesAmountDto(s.name, count(h.id))
-            from House h
-             join Street s on s.id = h.id
-            join City c on s.id = c.id
-            where c.name =: name
+            from Street s 
+            join House h on s.id = h.street.id
+            join City c on s.city.id = c.id
+            where c.name =:name
             group by s.name
             """)
     List<StreetsHousesAmountDto> getStreets(String name);

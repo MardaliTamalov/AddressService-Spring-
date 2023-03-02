@@ -11,10 +11,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-
 public class StreetServiceImpl implements StreetService {
 private final StreetsRepository streetsRepository;
-
     @Override
     @Transactional
     public List<StreetsHousesAmountDto> getStreets(String name) {

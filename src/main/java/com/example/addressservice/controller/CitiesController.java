@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class CitiesController {
     private final CityService cityService;
-
     @GetMapping()
     public ResponseEntity<?> getCities() {
         return ResponseEntity.status(HttpStatus.OK).body(cityService.getCities());

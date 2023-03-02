@@ -17,10 +17,10 @@ public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private int id;
 
     @Column(name = "number")
-    private Integer number;
+    private String number;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "street_id", referencedColumnName = "id")

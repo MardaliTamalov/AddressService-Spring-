@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HouseService {
-    List<HousesApartmentsAmountDto> getHouses(String name);
+
+    List<HousesApartmentsAmountDto> getHousesCity(String name);
+
+    List<HousesApartmentsAmountDto> getHousesStreet(String name);
 
     Optional<Integer> getId(CityStreetHouseDto cityStreetHouseDto);
 }

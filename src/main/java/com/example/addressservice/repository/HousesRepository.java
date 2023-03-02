@@ -10,23 +10,37 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HousesRepository extends JpaRepository<House, Integer> {
-@Query(value = """
-select new com.example.addressservice.dto.HousesApartmentsAmountDto(h.number, count (a.id))
-from Apartment a
-join House h on a.id=h.id
-join Street s on s.id=h.id
-join City c on s.id=c.id
-where s.name=:name or c.name=:name
-group by h.number
+
+    @Query(value = """
+select new com.example.addressservice.dto.HousesApartmentsAmountDto(c.name,s.name, h.number, count (a.id))
+from House h 
+join Apartment a on a.house_id.id = h.id
+join Street s on s.id=h.street.id
+join City c on c.id = s.city.id
+where c.name=:name 
+group by h.number, s.name, c.name
 """)
-    List<HousesApartmentsAmountDto> getHouses(String name);
+    List<HousesApartmentsAmountDto> getHousesCity(String name);
+
+
+    @Query(value = """
+select new com.example.addressservice.dto.HousesApartmentsAmountDto(c.name,s.name, h.number, count (a.id))
+from House h
+join Apartment a on a.house_id.id = h.id
+join Street s on s.id=h.street.id
+join City c on c.id = s.city.id
+where s.name=:name 
+group by h.number, s.name, c.name
+""")
+    List<HousesApartmentsAmountDto> getHousesStreet(String name);
 
 @Query(value = """
 select  h.id
 from House h
-join Street s on h.id=s.id
-join City c on c.id = s.id
-where c.name=:city and s.name=:street and h.number=:house
+join Street s on h.street.id =s.id
+join City c on c.id = s.city.id
+where c.name=:city and s.name=:street and h.number=:number
+
 """)
-    Optional<Integer> getId(String city, String street, Integer house);
+    Optional<Integer> getId(String city, String street, String number);
 }
